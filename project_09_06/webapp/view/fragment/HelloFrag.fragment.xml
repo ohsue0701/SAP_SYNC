@@ -1,0 +1,16 @@
+<!-- <c:FragmentDefinition controllerName="project0906.controller.helloPanel" -->
+ <c:FragmentDefinition
+ xmlns:c = "sap.ui.core"
+ xmlns = "sap.m">
+
+    <Panel headerText="***** Fragment 화면 *****">
+        <content>
+            <Button text="Hello Fragment" press=".HelloButtonPress"/>
+            <Input value="안녕하세요!" width="50%"></Input>
+
+            
+
+        </content>
+
+    </Panel>
+</c:FragmentDefinition>

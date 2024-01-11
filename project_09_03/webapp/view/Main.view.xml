@@ -1,0 +1,22 @@
+<mvc:View controllerName="project0903.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <!-- 수직 배열 레이아웃 껍데기 -->
+            <l:VerticalLayout>
+                <!-- Input 객체 선언, id 이용해서 입력받은 값을 controller에서 다뤄야 하므로 아이디도 설정-->
+                <Input id="idInput"/>
+                <!-- 작성완료 Button 객체 선언, press 했을 때 어떤 기능을 하는 함수를 불러야 하는지 함수명 기재 -->
+                <Button text="작성완료" press = "onClick_inputDone"/>
+                <!-- Text 객체 선언 -->
+                <Text id="idText"/>
+                <!-- 초기화 Button 객체 선언, press 했을 때 어떤 기능을 하는 함수를 불러야 하는지 함수명 기재 -->
+                <Button text="초기화" press = "onClick_init"/>
+
+            </l:VerticalLayout>
+
+        </content>
+    </Page>
+</mvc:View>

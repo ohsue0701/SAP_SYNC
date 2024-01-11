@@ -1,0 +1,64 @@
+<mvc:View controllerName="project0910.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <viz:Popover id="idPopover"/>
+            <!-- 1. 뷰에서 생성 -->
+            <viz:VizFrame id="idLineChart" width="500px" height="500px"
+            vizType="pie"
+            uiConfig="{'applicationSet' : 'fiori'}"
+            vizProperties="{
+                'title' : { 'visible' : true, 'text' : 'My Chart' },
+                'legendGroup' : {
+                    'layout' : {'position' : 'bottom'}
+                },
+                'plotArea' : {
+                    'drawingEffect' : 'glossy',
+                    'dataLabel' : {'visible' : true, 'type' : 'value' },
+                    'colorPalette' : ['#F361DC', '#6799FF']
+                }
+            }">
+            <!-- vizProperties로 title, 범례 위치, 시각적효과, 데이터라벨 등의 속성 설정 가능 -->
+            <!-- vizType 을 pie나 dounut으로 하고 싶으면, uid에 color, size로 바꿔주기. -->
+
+                <!-- 여기서부터 데이터만 매핑 -->
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{view>/list}">
+                        <!-- x축 -->
+                        <viz.data:dimensions>
+                            <!-- x축의 데이터를 정의. x축의 이름 지정하기, x축에 들어갈 데이터 끌어와주기 -->
+                            <viz.data:DimensionDefinition name="이름" value="{view>name}"></viz.data:DimensionDefinition>
+                        </viz.data:dimensions>
+
+                        <!-- y축 -->
+                        <!-- y축의 데이터를 정의. y축의 이름 지정하기, y축에 들어갈 데이터 끌어와주기 -->
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="숫자1" value="{view>rate}"></viz.data:MeasureDefinition>
+                            <viz.data:MeasureDefinition name="숫자2" value="{view>cost}"></viz.data:MeasureDefinition>
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+
+                <!-- 여기서부터 실제로 그려일 애들의 정보. FeedItem 클래스를 가져와서 화면에 그리기 -->
+                <viz:feeds>
+                    <!-- uid에 들어갈 수 있는 값 :
+                    categoryAxis(디맨션에 매핑. 그룹지어지는.) , valueAxis(매져에 매핑) (둘이짝꿍) line, column, stacked_bar
+                    color        , size      (둘이짝꿍) pie chart, d0nut 은 컬러나 사이즈로 구분을 하고-->  
+                    <!-- 중요! values에는 type에 있는 애(D, M 중 하나)의 DimensionDefinition, MeasureDefinition의 name 값을 넣기 !!!!! -->
+                    <viz.feeds:FeedItem uid="color" type="Dimension" values="이름"></viz.feeds:FeedItem> 
+                    <!-- 숫자 하나 더 추가 : values에 배열형태로, 띄어쓰기 없게 -->
+                    <viz.feeds:FeedItem uid="size" type="Measure" values="숫자1,숫자2"></viz.feeds:FeedItem>
+                </viz:feeds>
+            </viz:VizFrame>
+
+            <!-- 2. 컨에서 생성 (뷰에다 껍데기만 두고, 컨에서 작업 가능) -->
+            <viz:VizFrame id="idColChart" vizType="column"></viz:VizFrame>
+
+        </content>
+    </Page>
+</mvc:View>

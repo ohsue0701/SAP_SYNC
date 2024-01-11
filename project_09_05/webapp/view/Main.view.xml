@@ -1,0 +1,236 @@
+<mvc:View controllerName="project0905.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l = "sap.ui.layout"
+    xmlns:f = "sap.ui.layout.form"
+    xmlns:core = "sap.ui.core"
+    xmlns:t="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+
+        <Panel headerText="VerticalLayout" expandable="true" expanded="false">
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="VerticalLayout (툴바)"/>
+                    <ToolbarSpacer />
+                    <!-- 버튼에 아이콘 넣기 -->
+                    <Button text="Save" icon="sap-icon://biometric-face"></Button>
+                </Toolbar>
+            </headerToolbar>
+                        <!-- 세로정렬 -->
+            <l:VerticalLayout>
+                <Input value = "input" enabled="false"/>
+                <Text text="text"/>
+                <StepInput ></StepInput>
+                <Select />
+                <DatePicker ></DatePicker>
+                <DateRangeSelection />
+            </l:VerticalLayout>
+                    
+        </Panel>
+
+        <!-- 가로정렬 -->
+        <Panel headerText="HorizontalLayout" expandable="true" expanded="false">
+            <l:HorizontalLayout>
+                <Input value = "input" enabled="false"/>
+                <Text text="text"/>
+                <StepInput ></StepInput>
+                <Select />
+                <DatePicker ></DatePicker>
+                <DateRangeSelection />
+            </l:HorizontalLayout>
+        </Panel>
+        <Panel headerText="Form" expandable="true" expanded="false">
+            <!-- Form -->
+            <f:Form id="FormChangeColumn_threeGroups234" editable="true">
+                <f:title>
+                    <core:Title text="Supplier" />
+                </f:title>
+                <f:layout>
+                    <f:ColumnLayout
+                        columnsM="2"
+                        columnsL="3"
+                        columnsXL="4"
+                    />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer title="Group 1">
+                        <f:formElements>
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name1"/>
+                                </f:fields>
+                            </f:FormElement>  
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name2"/>
+                                </f:fields>
+                            </f:FormElement>   
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name3"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name4"/>
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                    
+                    <f:FormContainer title="Group 2">
+                        <f:formElements>
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name5"/>
+                                </f:fields>
+                            </f:FormElement>  
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name6"/>
+                                </f:fields>
+                            </f:FormElement>   
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name7"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Name">
+                                <f:fields>
+                                    <Input value="{SupplierName}" id="name8"/>
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+        </Panel>
+        <!-- SimpleForm -->
+
+        <Panel headerText="SimpleForm" expandable="true" expanded="false">
+            <f:SimpleForm id="SimpleFormDisplayColumn_threeGroups234"
+                editable="false"
+                layout="ColumnLayout"
+                title="Supplier"
+                columnsM="2"
+                columnsL="3"
+                columnsXL="4"
+                >
+                <f:content>
+                    <core:Title text="Address" />
+                    <Label text="Name" />
+                    <Text text="Text"></Text>
+                    <Text id="nameText" text="{SupplierName}" />
+                    <Label text="Street/No." />
+                    <Input value="Input"></Input>
+                    <!-- <Text text="{Street} {HouseNumber}" /> -->
+                    <Input value="{HouseNumber}">
+                        <layoutData>
+                            <l:GridData span="XL2 L3 M4"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Label text="ZIP Code/City" />
+                    <Text text="{ZIPCode} {City}" />
+                    <Label text="Country" />
+                    <Text id="countryText" text="{Country}" />
+                    <Label text="Web" />
+                    <Link text="Url" href="{Url}" />
+
+                    <core:Title text="Contact" />
+                    <Label text="Twitter" />
+                    <Text text="{Twitter}" />
+                    <Label text="Email" />
+                    <Text text="{Email}" />
+                    <Label text="Tel." />
+                    <Text text="{Tel}" />
+
+                    <core:Title text="Other" />
+                    <Label text="SMS" />
+                    <Text text="{Sms}" />
+                    <Label text="Mobile" />
+                    <Text text="{Mobile}" />
+                    <Label text="Pager" />
+                    <Text text="{Pager}" />
+                    <Label text="Fax" />
+                    <Text text="{Fax}" />
+                </f:content>
+            </f:SimpleForm>
+        </Panel>
+
+        <!-- Grid -->
+        <Panel headerText="Grid" expandable="true" expanded="false">
+        
+            <!-- <l:Grid >
+                <Input value="test1">
+                    <layoutData>
+                        <l:GridData span="XL6 L2 M4 S12"/>
+                    </layoutData>
+                </Input>
+                <Input value="test2">
+                    <layoutData>
+                        <l:GridData span="XL6 L6 M4 S12"/>
+                    </layoutData>
+                </Input>
+                <Input value="test3">
+                    <layoutData>
+                        <l:GridData span="XL6 L4 M4 S12"/>
+                    </layoutData>
+                </Input>
+                <Input value="test4">
+                    <layoutData>
+                        <l:GridData span="XL6 L2 M4 S12"/>
+                    </layoutData>
+                </Input>
+                <Input value="test5">
+                    <layoutData>
+                        <l:GridData span="XL6 L2 M4 S12"/>
+                    </layoutData>
+                </Input>
+                <Input value="test6">
+                    <layoutData>
+                        <l:GridData span="XL6 L2 M4 S12"/>
+                    </layoutData>
+                </Input>
+            </l:Grid> -->
+
+            <l:Grid >
+            <!-- 웹브라우저 안에 그리드 공간 생성 -->
+                <VBox >
+                <!-- 한켠에 첫번째 브이박스 -->
+                    <layoutData>
+                        <l:GridData span="XL4 L6 M6 S12"/>
+                    </layoutData>
+                    <Input value="1"></Input>
+                    <Input value="1"></Input>
+                    <Input value="1"></Input>
+                </VBox>
+                <VBox >
+                <!-- 한켠에 두번째 브이박스 -->
+                    <layoutData>
+                        <l:GridData span="XL6 L9 M6 S12"/>
+                    </layoutData>
+                    <Input value="2"></Input>
+                    <Input value="2"></Input>
+                    <Input value="2"></Input>
+                    <t:Table
+                        rows="{/ProductCollection}"
+                        selectionMode="MultiToggle"
+                        paste="onPaste"
+                        ariaLabelledBy="title">
+
+                        <t:columns>
+                            <t:Column width="11rem">
+                                <Label text="Product Name" />
+                                <t:template>
+                                    <Text text="{Name}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+			        </t:Table>
+                </VBox>
+            </l:Grid>
+        </Panel>
+        
+
+    </Page>
+</mvc:View>

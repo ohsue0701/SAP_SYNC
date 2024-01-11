@@ -1,0 +1,100 @@
+ <c:FragmentDefinition
+    xmlns:c = "sap.ui.core"
+    xmlns = "sap.m"
+    xmlns:t="sap.ui.table">
+    <Dialog id="idDialogf"
+            contentWidth="40%"
+            contentHeight="50%"
+            draggable="true"
+            resizable="true">
+        <content>
+            <t:Table id="idTablef" rows = "{/Products}" >
+                    <t:extension>
+                        <OverflowToolbar style="Clear">
+                            <Title id="titlef" text="Products"/>
+                        </OverflowToolbar>
+                    </t:extension>
+                    
+                    <t:columns>
+                        <t:Column>
+                            <Label text="ProductID" /> 
+                            <t:template>
+                                <Text text="{ProductID}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="ProductName" /> 
+                            <t:template>
+                                <Text text="{ProductName}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="SupplierID" /> 
+                            <t:template>
+                                <Text text="{SupplierID}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="CategoryID" /> 
+                            <t:template>
+                                <Text text="{CategoryID}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="QuantityPerUnit" /> 
+                            <t:template>
+                                <Text text="{QuantityPerUnit}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="UnitPrice" /> 
+                            <t:template>
+                                <Text text="{UnitPrice}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="UnitsInStock" /> 
+                            <t:template>
+                                <Text text="{UnitsInStock}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="UnitsOnOrder" /> 
+                            <t:template>
+                                <Text text="{UnitsOnOrder}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="ReorderLevel" /> 
+                            <t:template>
+                                <Text text="{ReorderLevel}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Discontinued" /> 
+                            <t:template>
+                                <Text text="{
+                                    path : 'Discontinued',
+                                    formatter : '.transformDiscontinued'
+                                    }" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Status" /> 
+                            <t:template>
+                                <c:Icon 
+                                    src="{= ${UnitPrice} >= 15 ? 'sap-icon://thumb-up' : 'sap-icon://thumb-down'}"
+                                    color="{= ${UnitPrice} >= 15 ? 'rgb(27, 234, 33)' : 'rgb(234, 52, 27)'}"/>
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+			    </t:Table>
+        </content>
+
+        <!-- 팝업 닫는 버튼 -->
+        <endButton>
+            <Button text="close" icon="sap-icon://decline" press="onClose"></Button>
+        </endButton>
+    </Dialog>
+
+ </c:FragmentDefinition>

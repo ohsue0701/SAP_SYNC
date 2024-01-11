@@ -1,0 +1,58 @@
+<mvc:View controllerName="project0908.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:t="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <t:Table
+                id="calTable"
+				rows="{/list}"
+				selectionMode="MultiToggle"
+                rowActionCount="1"
+				paste="onPaste"
+				ariaLabelledBy="title">
+                <t:rowActionTemplate>
+                    <!-- rowActionTemplate 안쪽엔 rowAction 들어감. 쭉쭉 사이트의 aggreggation 필드 참고. -->
+                    <t:RowAction >
+                        <t:items>
+                            <t:RowActionItem type="Delete" press="onRowDelete" icon=""/>
+                        </t:items>
+                    </t:RowAction>
+                </t:rowActionTemplate>
+                <t:extension>
+                    <OverflowToolbar >
+                        <content>
+                            <Title text="Table" level="H2"></Title>
+                            <ToolbarSpacer ></ToolbarSpacer>
+                            <Button 
+                                text="Add"
+                                press="onAdd"
+                                type="Emphasized"
+                                icon="sap-icon://add">
+                            </Button>
+                            <Button 
+                                text="Delete"
+                                press="onDelete"
+                                type="Emphasized"
+                                icon="sap-icon://delete">
+                            </Button>
+                        </content>
+                    </OverflowToolbar>
+                </t:extension>
+				<t:columns >
+					<t:Column hAlign="End">
+						<Label text="num1" width="100%" textAlign="Center" />
+						<t:template>
+                            <Input value = "{name}" />
+						</t:template>
+					</t:Column>
+                    <t:Column hAlign="End">
+						<Label text="num2" width="100%" textAlign="Center" />
+						<t:template>
+                            <Input value = "{age}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+        </content>
+    </Page>
+</mvc:View>

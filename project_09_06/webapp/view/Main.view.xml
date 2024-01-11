@@ -1,0 +1,31 @@
+<!-- 경로로 Main 뷰 가져오기 -->
+<mvc:View controllerName="project0906.controller.Main" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:c="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Text text=" ***** 여기는 Main.view.xml 입니다. ***** "></Text>
+
+            <!-- 경로로 helloPanel (중첩뷰) 가져오기. -->
+            <mvc:XMLView viewName="project0906.view.helloPanel"></mvc:XMLView>
+
+            <!-- fragment View (조각뷰) 가져오기. 이렇게 경로로 부르는 조각뷰에는 컨트롤러 주소 없어도 되는듯. -->
+            <c:Fragment fragmentName="project0906.view.fragment.HelloFrag"/>
+
+            <!-- (실습) fragment View (조각뷰) 가져오기. 이렇게 경로로 부르는 조각뷰에는 컨트롤러 주소 없어도 되는듯. -->
+            <c:Fragment fragmentName="project0906.view.fragment.Name"/>
+
+            <!-- fragment - Dialog 팝업 호출 -->
+            <c:Fragment fragmentName="project0906.view.fragment.Dialog"/>
+            <Button text="View 내에 호출한 팝업 오픈" press="onOpenDialog"></Button>
+            
+            <!-- Controller에서 팝업 오픈! 그냥 버튼 하나, 프레스 이벤트 하나 설정해두고 컨에서 경로로 접근
+            <Button text="Controller에서 팝업 오픈" press="onOpenDialog_con"></Button> -->
+
+            <Button text="Controller 에서 팝업 오픈 (실습)" press="onOpenDialogP_con"></Button>
+
+
+            
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,20 @@
+ <c:FragmentDefinition xmlns:c = "sap.ui.core" xmlns = "sap.m">
+
+    <!-- sap.m.Dialog -->
+    <Dialog id="idDialog"
+            contentWidth="40%"
+            title="제목"
+            contentHeight="50%"
+            draggable="true"
+            resizable="true">
+        <content>
+            <Text text="Hello Dialog"></Text>
+        </content>
+
+        <!-- 팝업 닫는 버튼 -->
+        <endButton>
+            <Button text="close" icon="sap-icon://decline" press="onClose"></Button>
+        </endButton>
+    </Dialog>
+
+ </c:FragmentDefinition>

@@ -1,0 +1,149 @@
+<!--컨트롤러는 요기!-->
+<mvc:View controllerName="hello.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table">
+    <!-- 위 부분 세팅 구조와 샘플의 세팅구조 다르니 주의 -->
+    <Page id="page" title="{i18n>title}">
+        <content> <!--열린태그-->
+            <layout:VerticalLayout id='test' width="300px">
+            <!-- 버티컬레이아웃에 아이디 주고, 바인딩 하면 밑에 애들이 다 상대경로 쓸 수 있다.  -->
+
+            <!-- TITLE에 대해서 상대경로 바인딩 (컨텍스트 바인딩) -->
+                <Title id="idTitle" text="{op>subTitle}"/>
+                <!-- binding = "{op>/title}" -->
+                <!-- 윗줄에 해당하는 부분을 컨에서 할 수 있음. 컨텍스트 바인딩 -->
+                <!-- 타이틀까지는 이미 바인딩되어 있는 상태 -->
+
+                <Input id="idInput1" /> <!--어그리게이션 빼고 다 아이디 부여 가능-->
+                <Select width="100%" showSecondaryValues="true" id="idSelect" items="{op>/list}"> 
+                <!-- 모델명은 >로 구분하는거임. 모델명의 상징! -->
+                <!-- op 모델 안의 list까지 세팅을 해 놓고, -->
+
+                <!-- select 이 객체의 속성을 검색해야지~~~ -->
+                    <!-- <items>
+                        <core:Item key="plus" text="+"/>
+                        <core:Item key="minus" text="-"/>
+                        <core:Item key="multiple" text="*"/>
+                        <core:Item key="divide" text="/"/>
+                    </items> -->
+                    <items> <!--Item을 상속받은 ListItem이라는 객체에 additionText 속성 존재-->
+                        <!-- <core:ListItem key="plus" text="+" additionalText="더하기" />
+                        <core:ListItem key="minus" text="-" additionalText="빼기" />
+                        <core:ListItem key="mutiple" text="*" additionalText="곱하기" />
+                        <core:ListItem key="divide" text="/" additionalText="나누기" /> -->
+
+                        <!-- 바인딩예제 -->
+                        <!-- <core:ListItem key="{op>/list/0/key}" text="{op>/list/0/text}" additionalText="{op>/list/0/text}" />
+                        <core:ListItem key="{op>/list/1/key}" text="{op>/list/1/text}" additionalText="{op>/list/1/text}" />
+                        <core:ListItem key="{op>/list/2/key}" text="{op>/list/2/text}" additionalText="{op>/list/2/text}" />
+                        <core:ListItem key="{op>/list/3/key}" text="{op>/list/3/text}" additionalText="{op>/list/3/text}" /> -->
+
+                        <!-- 위의 items="{op>/list}" 라고 불러옴으로써 네줄을 아래처럼 함축할 수 있다. -->
+                        <core:ListItem key="{op>key}" text="{op>text}" additionalText="{op>text}" />
+                        <!-- 위에 버티컬레이아웃에 id 주고 컨텍스트 바인딩 하면 아래처럼 쓸 수 있다. -->
+                        <!-- <core:ListItem key="{key}" text="{text}" additionalText="{text}" /> -->
+                    </items>
+                    
+                </Select>
+                <Input id="idInput2" />
+                <Button width = "100%" text = "실행" press = "onCalc"/>
+
+                <Button width = "100%" text = "Clear" press = "onClear"></Button>
+
+            </layout:VerticalLayout>
+
+            <!-- sap.ui.table.Table 가져오기 : 샘플소스에서 가져오기도 가능 -->
+			<t:Table
+                id="calTable"
+				rows="{local>/history}"
+				selectionMode="MultiToggle"
+				paste="onPaste"
+				ariaLabelledBy="title">
+
+				<t:columns >
+					<t:Column hAlign="End">
+						<Label text="No.1" width="100%" textAlign="Center" />
+						<t:template>
+							<Text text="{local>num1}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column hAlign="Center">
+						<Label text="Operator" width="100%" textAlign="Center" />
+						<t:template>
+							<Text text="{local>oper}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column hAlign="End">
+						<Label text="No.2" width="100%" textAlign="Center" />
+						<t:template>
+							<Text text="{local>num2}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column hAlign="End">
+						<Label text="Result" width="100%" textAlign="Center" />
+						<t:template>
+							<Text text="{local>result}" wrapping="false" />
+						</t:template>
+					</t:Column>
+                    <t:Column hAlign="Center">
+						<Label text="Status" width="100%" textAlign="Center" />
+						<t:template>
+                            <core:Icon
+                                src="sap-icon://bell-2"
+                                class="size1"
+                                color="{
+                                    path : 'local>result',
+                                    formatter : '.fnColorFormat'
+                                }" 
+                                visible="{= ${local>result} > 100 ? true : true}">
+
+                                <!-- color="{= ${local>result} &lt; 100 ? '#86E57F' : '#F361A6'}"  -->
+                                
+                                <core:layoutData>
+                                    <FlexItemData growFactor="1" />
+                                </core:layoutData>
+                            </core:Icon>
+						</t:template>
+					</t:Column>
+
+				</t:columns>
+			</t:Table>
+
+            <!-- sap.m.Table 가져오기 -->
+            <Table id="idProductsTable">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="Products" level="H2"/>
+                            <ToolbarSpacer />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <!-- 컬럼즈의 컬럼 개수, 아이템즈에 들어가는 셀의 개수는 같아야 한다. 컬럼의 맨 상단에 Price가 들어가고, 하나하나의 데이터 안에는 text가 들어감. -->
+                <columns>
+                    <Column
+                        hAlign="End">
+                        <Text text="Price" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{SupplierName}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+
+            </Table>
+            
+
+        </content> <!--닫힌태그-->
+        <footer>
+        </footer>
+
+    </Page>
+</mvc:View>

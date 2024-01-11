@@ -1,0 +1,22 @@
+<mvc:View controllerName="project0904.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+        <VBox >
+            <Button text = "btn"/>
+            <Input value = "input" enabled="false"/>
+            <Text text="text"/>
+            <DatePicker ></DatePicker>
+            <Select />
+            <ComboBox />
+            <DateRangeSelection />
+            <Label text="label"/>
+            <StepInput ></StepInput>
+            <TimePicker ></TimePicker>
+            <RadioButton ></RadioButton>
+            <CheckBox ></CheckBox>
+        </VBox>
+        </content>
+    </Page>
+</mvc:View>
