@@ -1,0 +1,140 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "project0912",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.12.1",
+            "toolsId": "fd12aeef-c2b3-4120-a5ac-a735de897a1c"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.71.49",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "project0912.i18n.i18n"
+                }
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "project0912.view",
+                "controlAggregation": "pages",
+                "bypassed": {
+                    "target" : "NotFound"
+                },
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteMain",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetMain"
+                    ]
+                },
+                {
+                    "name": "RouteDetail",
+                    "pattern": "detail/{key1}/:key2:",
+                    "target": [
+                        "TargetDetail"
+                    ]
+                },
+                {
+                    "name": "RouteEmployee",
+                    "pattern": "employee/{key1}/{key2}:key3:",
+                    "target": [
+                        "TargetEmployee"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetMain": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Main",
+                    "viewName": "Main"
+                },
+                "TargetDetail": {
+                    "viewType": "XML",
+                    "transition": "fade",
+                    "viewId": "Detail",
+                    "viewName": "Detail"
+                },
+                "TargetEmployee": {
+                    "viewType": "XML",
+                    "transition": "flip",
+                    "viewId": "Employee",
+                    "viewName": "Employee"
+                },
+                "NotFound" : {
+                    "viewType": "XML",
+                    "transition": "show",
+                    "viewId": "NotFound",
+                    "viewName": "NotFound"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "project0912.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

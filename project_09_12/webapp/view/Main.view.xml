@@ -1,0 +1,11 @@
+<mvc:View controllerName="project0912.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Button text="Detail" press="onGoDetail"></Button>
+            <Button text="Disply Not Found" press="onGoNotFound"></Button>
+            <Button text="Employee" press="onGoEmployee"></Button>
+        </content>
+    </Page>
+</mvc:View>

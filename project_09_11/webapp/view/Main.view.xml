@@ -92,6 +92,7 @@
                                             <micro:RadialMicroChart
                                                 size="S"
                                                 percentage="{= ${UnitsInStock}/100}"
+                                                alignContent="Center"
                                                 valueColor="{= ${UnitsInStock}/100 > 0.3 ? 'Good' : 'Error'}">
                                                 
                                             </micro:RadialMicroChart>

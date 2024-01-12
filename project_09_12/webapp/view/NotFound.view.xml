@@ -1,0 +1,11 @@
+<mvc:View controllerName="project0912.controller.NotFound"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <MessagePage
+        title="NotFound"
+        text="페이지를 찾지 못하였습니다."
+        description="URL을 다시 입력해주세요."
+        showNavButton="true"
+        navButtonPress="onNavBack">
+    </MessagePage>
+</mvc:View>

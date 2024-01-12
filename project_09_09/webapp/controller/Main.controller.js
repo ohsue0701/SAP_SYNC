@@ -16,6 +16,17 @@ sap.ui.define([
                     OrderDate_end : null
                 };
                 this.getView().setModel(new JSONModel(oData), 'search');
+
+
+                this.oRouter = this.getOwnerComponent().getRouter();
+                this.oRouter.getRoute("RouteMain").attachPatternMatched(this._onPatternMatched, this);
+            },
+
+            _onPatternMatched: function (oEvent) { // argument를 받아오는 함수???
+                var oArgu = oEvent.getParameter('arguments');
+                var oArgu = oEvent.getParameters.arguments; // 위와 동일
+                // console.log("Main : ", oArgu);
+                // console.log("Main : ", oArgu["?query"].test); // 메인뷰로 갈 때 10 출력
             },
 
             fnDateString : function (sValue) { // sValue에 OrderDate가 들어옴
@@ -117,10 +128,15 @@ sap.ui.define([
             onSelectionChange : function (oEvent) { // 파라미터 변수로 이벤트 객체가 들어옴
                 // 상대경로로 지정되어 있는 데이터셋에서, 내가 선택한 ROW의 모델 경로를 얻음
                 var sPath = oEvent.getParameters().listItem.getBindingContextPath();
+                // 콘솔에서 listItem 찍어서 뭔지 보기
                 // 모델 경로를 통해서 해당 경로의 전체 데이터를 얻음
                 var oSelectData = this.getView().getModel().getProperty(sPath);
+                // alert(oSelectData.OrderID); // 내가 선택한 행의 orderID가 얼럿된다.
 
-                alert(oSelectData.ShipName); // 내가 선택한 행의 orderID가 얼럿된다.
+                // Detail뷰로 이동
+                this.oRouter.navTo('RouteDetail', {
+                    OrderID : oSelectData.OrderID
+                }, true);
 
 
             }
