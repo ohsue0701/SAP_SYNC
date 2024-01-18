@@ -20,11 +20,11 @@ sap.ui.define([
                 // this.byId("idText").setText(oArgu.OrderID); // oArgu는 객체이므로, 객체의 키값을 지정해서 거기에 있는 OrderID 값을 지정해줘야!!!
                 
                 this.byId("idForm").bindElement(`/Orders(${oArgu.OrderID})`)
-                // 빈 모델의 Orders 엔티티셋의 한 값(클릭한 애) 바인딩
+                // 빈 모델의 Orders 엔티티셋의 한 값(클릭한 애) 바인딩 "/Orders(10248)"
                 // orderid 가지고 컨텍스트 바인딩 하는 방식 "EntitySetName(key='1', key2='2')"
                 // key가 1개면 다 생략 가능 "EntitySetName('1')" 이라고 써도됨
                 // 메타 보면, Order이라는 엔티티의 키값이 OrderId이고, 그 밑에 ShipName, ShipCity 등의 애들이 있는 거니까
-                // Orders(10123)이라고 하면 그 그 오더아이디를 키값으로 갖는 행 하나 까지 길잡이가 데려가 있게 바인딩.
+                // Orders(10123)이라고 하면 그 그 오더아이디를 키값으로 갖는 행 하나 라는 곳 까지 길잡이가 데려가 있게 바인딩.
                 // Orders에 대한 한건의 데이터가 바인딩되어있음. 
                 // 뷰에서, idForm 이라는 아이디를 가진 애 안에 해당 데이터를 넣을수 있다.
                 // <Text text="{OrderID}" id="name1"/> 그 오더아이디를 키값으로 갖는 행 하나에서, OrderID의 값이 텍스트가 되는거.

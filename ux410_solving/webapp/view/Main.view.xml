@@ -1,0 +1,82 @@
+<mvc:View controllerName="sap.btp.ux410solving.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:c="sap.ui.core"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+    <f:DynamicPage id="dynamicPageID" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+        <f:title>
+            <f:DynamicPageTitle >
+                <f:heading>
+					<Title text="VizFrame"/>
+				</f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <fb:FilterBar search=".onSearch">
+                    <fb:filterGroupItems>
+                        <fb:FilterGroupItem name="Orders" label="Orders" groupName="group1" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox id="idComboBox" name="OrderID :" items="{/Orders}">
+                                    <c:ListItem key="{OrderID}" text="{OrderID}" additionalText="{CustomerID}" ></c:ListItem>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem name="type" label="type" groupName="group1" visibleInFilterBar="true">
+                            <fb:control>
+                                <ComboBox id="idComboBox2" name="type :" items="{typeList>/list}" required="true" change="onValueChange">
+                                    <c:ListItem key="{typeList>type}" text="{typeList>type}" ></c:ListItem>
+                                </ComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+
+            </f:DynamicPageHeader>
+
+        </f:header>
+
+        <f:content>
+        
+            <viz:VizFrame id="idChart" width="500px" height="500px"
+            vizType="bar"
+            uiConfig="{'applicationSet' : 'fiori'}"
+            selectData="onSelectData">
+            <!-- vizProperties로 title, 범례 위치, 시각적효과, 데이터라벨 등의 속성 설정 가능 -->
+            <!-- vizType 을 pie나 dounut으로 하고 싶으면, uid에 color, size로 바꿔주기. -->
+
+                <!-- 여기서부터 데이터만 매핑 -->
+                <viz:dataset>
+                    <viz.data:FlattenedDataset id="idDataSet" data="{/Order_Details}">
+                        <!-- x축 -->
+                        <viz.data:dimensions>
+                            <!-- x축의 데이터를 정의. x축의 이름 지정하기, x축에 들어갈 데이터 끌어와주기 -->
+                            <viz.data:DimensionDefinition name="x1" value="{OrderID}"></viz.data:DimensionDefinition>
+                            <viz.data:DimensionDefinition name="x2" value="{ProductID}"></viz.data:DimensionDefinition>
+                        </viz.data:dimensions>
+
+                        <!-- y축 -->
+                        <!-- y축의 데이터를 정의. y축의 이름 지정하기, y축에 들어갈 데이터 끌어와주기 -->
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="y1" value="{UnitPrice}"></viz.data:MeasureDefinition>
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+
+                <!-- 여기서부터 실제로 그려일 애들의 정보. FeedItem 클래스를 가져와서 화면에 그리기 -->
+                <viz:feeds>
+                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="x1,x2"></viz.feeds:FeedItem> 
+                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="y1"></viz.feeds:FeedItem>
+                </viz:feeds>
+            </viz:VizFrame>
+        </f:content>
+
+
+    </f:DynamicPage>
+</mvc:View>

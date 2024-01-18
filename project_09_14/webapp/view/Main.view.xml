@@ -1,0 +1,88 @@
+<mvc:View controllerName="project0914.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:Grid
+            binding="{/PersonCollection}"
+            class="sapUiSmallMarginTop"
+            hSpacing="2"
+            defaultSpan="L6 M6 S10">
+                <l:content>
+                    <Input description="Memid" value = "{data>/Memid}" id="idInput1">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Memnm" value = "{data>/Memnm}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Telno"  value = "{data>/Telno}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Email" value = "{data>/Email}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    
+                </l:content>
+        </l:Grid>
+
+        <t:Table id="idTable"
+                rows="{/Member}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                paste="onPaste"
+                ariaLabelledBy="title"
+                rowSelectionChange="onRowSelectionChange">
+            <t:extension>
+                <OverflowToolbar style="Clear">
+                <Title id="title" text="Member"></Title>
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Read Entity" press="onEntity"></Button>
+                <Button text="EntitySet" press="onEntitySet"></Button>
+                <Button text="Create" press="onCreate"></Button>
+                <Button text="Update" press="onUpdate"></Button>
+                <Button text="Delete" press="onDelete"></Button>
+                <Button icon="sap-icon://reset" press="onReset"></Button>
+                </OverflowToolbar>
+            </t:extension>
+            <t:columns >
+                <t:Column >
+                    <Label text="Memid"/>
+                    <t:template>
+                        <Text text="{Memid}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Memnm"/>
+                    <t:template>
+                        <Text text="{Memnm}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Telno"/>
+                    <t:template>
+                        <Text text="{Telno}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Email"/>
+                    <t:template>
+                        <Text text="{Email}" />
+                    </t:template>
+                </t:Column>
+            </t:columns >
+
+        </t:Table>
+
+        </content>
+    </Page>
+</mvc:View>

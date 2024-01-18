@@ -1,0 +1,45 @@
+<mvc:View controllerName="sap.btp.ux410solving.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:c="sap.ui.core"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:uxap="sap.uxap"
+    xmlns:form="sap.ui.layout.form">
+    <Page showNavButton="true" navButtonPress="onNavBack">
+        
+        <uxap:ObjectPageLayout >
+            <uxap:ObjectPageSection >
+                <uxap:ObjectPageSubSection >
+                    <form:SimpleForm id="idForm" title="Info"> 
+                        <form:content >
+
+
+                            <Label text="OrderID" />
+                            <Text id="OrderID" text="{OrderID}"/>
+
+                            <Label text="ProductID" />
+                            <Text id="ProductID" text="{ProductID}" />
+
+                            <Label text="UnitPrice" />
+                            <Text id="UnitPrice" text="{UnitPrice}" />
+
+                            <Label text="Quantity" />
+                            <Text id="Quantity" text="{Quantity}" />
+
+                            <Label text="Discount" />
+                            <Text id="Discount" text="{Discount}" />
+                        </form:content>
+
+
+
+                    </form:SimpleForm>
+                </uxap:ObjectPageSubSection>
+            </uxap:ObjectPageSection>
+        </uxap:ObjectPageLayout>
+    </Page>
+    
+</mvc:View>

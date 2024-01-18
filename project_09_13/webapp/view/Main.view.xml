@@ -1,0 +1,99 @@
+<mvc:View controllerName="odata.project0913.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:Grid
+            binding="{/PersonCollection}"
+            class="sapUiSmallMarginTop"
+            hSpacing="2"
+            defaultSpan="L6 M6 S10">
+                <l:content>
+                    <Input description="Productno" value = "{data>/Productno}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Productname" value = "{data>/Productname}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Fname"  value = "{data>/Fname}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Lname" value = "{data>/Lname}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    <Input description="Memo" value = "{data>/Memo}">
+                        <layoutData>
+                            <l:GridData span="XL4 L4 M6 S12"></l:GridData>
+                        </layoutData>
+                    </Input>
+                    
+                </l:content>
+        </l:Grid>
+        <!-- sap.ui.table.Table추가해서, Products 조회 -->
+        <t:Table id="idTable"
+                rows="{/Products}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                paste="onPaste"
+                ariaLabelledBy="title"
+                rowSelectionChange="onRowSelectionChange">
+            <t:extension>
+                <OverflowToolbar style="Clear">
+                <Title id="title" text="Products"></Title>
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button text="Read Entity" press="onEntity"></Button>
+                <Button text="EntitySet" press="onEntitySet"></Button>
+                <Button text="Create" press="onCreate"></Button>
+                <Button text="Update" press="onUpdate"></Button>
+                <Button text="Delete" press="onDelete"></Button>
+                <Button icon="sap-icon://reset" press="onReset"></Button>
+                </OverflowToolbar>
+            </t:extension>
+            <t:columns >
+                <t:Column >
+                    <Label text="Productno"/>
+                    <t:template>
+                        <Text text="{Productno}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Productname"/>
+                    <t:template>
+                        <Text text="{Productname}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Fname"/>
+                    <t:template>
+                        <Text text="{Fname}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Lname"/>
+                    <t:template>
+                        <Text text="{Lname}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Memo"/>
+                    <t:template>
+                        <Text text="{Memo}" />
+                    </t:template>
+                </t:Column>
+            </t:columns >
+
+        </t:Table>
+
+        </content>
+    </Page>
+</mvc:View>
