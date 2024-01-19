@@ -1,0 +1,56 @@
+<c:FragmentDefinition 
+    xmlns:c = "sap.ui.core"
+    xmlns = "sap.m"
+    xmlns:t= "sap.ui.table">
+
+    <!-- sap.m.Dialog -->
+    <Dialog id="idDialog"
+            contentWidth="40%"
+            title="제목"
+            contentHeight="50%"
+            draggable="true"
+            resizable="true">
+        <content>
+            <t:Table id="idTable" rows="{dModel>/}"> 
+                <t:columns >
+                <t:Column >
+                    <Label text="Productno"/>
+                    <t:template>
+                        <Text text="{dModel>Productno}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Productname"/>
+                    <t:template>
+                        <Text text="{dModel>Productname}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Fname"/>
+                    <t:template>
+                        <Text text="{dModel>Fname}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Lname"/>
+                    <t:template>
+                        <Text text="{dModel>Lname}" />
+                    </t:template>
+                </t:Column>
+                <t:Column >
+                    <Label text="Memo"/>
+                    <t:template>
+                        <Text text="{dModel>Memo}" />
+                    </t:template>
+                </t:Column>
+            </t:columns >
+            </t:Table>
+        </content>
+
+        <!-- 팝업 닫는 버튼 -->
+        <endButton>
+            <Button text="close" icon="sap-icon://decline" press="onClose"></Button>
+        </endButton>
+    </Dialog>
+
+ </c:FragmentDefinition>

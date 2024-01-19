@@ -1,10 +1,10 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel", "sap/m/MessageBox"
+    "sap/ui/core/mvc/Controller", "sap/ui/model/json/JSONModel", "sap/m/MessageBox", "sap/ui/model/Filter","sap/ui/core/Fragment"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, MessageBox) {
+    function (Controller, JSONModel, MessageBox, Filter, Fragment) {
         "use strict";
 
         return Controller.extend("odata.project0913.controller.Main", {
@@ -32,7 +32,8 @@ sap.ui.define([
                 // 이 앞에서 디버거 찍어보고 하나씩 함수 순서대로 작성한것 뿐!
                 // sPath는 경로. 문자열. '/Orders('선택된 행의 키 10238')'
                 var sPath = oEvent.getParameter('rowContext').getPath();
-                var oSelectData = this.getView().getModel().getProperty(sPath); // 서버 모델의 데이터 싹 가져오기
+                var oSelectData = this.getView().getModel().getProperty(sPath);
+                // 서버 모델의 데이터 싹 가져오기, getProperty의 파라미터에 path가 들어가기 때문에 힘들게 path값 구한거.
                 this.getView().getModel('data').setData(oSelectData);
 
                 // oSelectData에는 이런 값이 들어감
@@ -86,17 +87,52 @@ sap.ui.define([
                 // GET 요청 : "/Products"
                 var oDataModel = this.getView().getModel(); 
 
+                // 필터 구현
+                var oFilter = new Filter("Productname", "EQ", "안녕");
+                // 이렇게 순서 맞추어 축약해서 써도 무방. Productname라는 애가 안녕 과 동일한 애만 보여달라는 뜻.
+
+                // 다이얼로그 객체 선언
+                var oDialog = sap.ui.getCore().byId("idDialog");
+
                 oDataModel.read("/Products", { // read 메서드  : read(sPath, mParameters?)
-                    // filters : [], // 이런식으로 필터 객체 배열 들어감.
+                    filters : [oFilter], // 이런식으로 필터 객체 배열 들어감.
                     success: function(oReturn) { // mParameters?에 success있음. 타입은 function이라고 되어있으므로.
-                        MessageBox.success("전체조회 완료되었습니다.");
+
                         console.log("전체조회 : ", oReturn);
-                    },
+
+                        MessageBox.success("전체조회 완료되었습니다.", {
+                            onClose: function(action) {
+                                if(action === 'OK') {
+                                    // 다이얼로그 오픈
+                                    if (oDialog) { 
+                                        oDialog.open();
+                                    } else { 
+                                        Fragment.load({
+                                            name : "odata.project0913.view.Dialog",
+                                            type : "XML",
+                                            controller : this
+                                        }).then(function(Dialog){
+                                            // 다이얼로그 로드 및 오픈 후 다이얼로그에 모델 세팅
+                                            Dialog.setModel(new JSONModel(oReturn.results), 'dModel');
+                                            Dialog.open();
+                                        });
+                                    }
+                                }
+                            }.bind(this)
+                        });
+                    }.bind(this),
                     error: function (oError) { // mParameters?에 에러 처리하는 애도 있음.
                         MessageBox.error("데이터 생성 중 오류가 발생하였습니다.");
                         console.log("전체조회 중 오류 발생 : ", oError);
-                    }
+                    }.bind(this)
                 }); // -> 서버에 한번 다녀와서, 데이터 가지고 와서 리턴해줌. 
+
+
+
+                
+            },
+            onClose: function(oEvent) {
+                oEvent.getSource().getParent().close(); 
             },
             onEntity: function () {
                 // 데이터 한 건 조회
@@ -106,7 +142,7 @@ sap.ui.define([
 
                 var oDataModel = this.getView().getModel();
                 var sPath = oDataModel.createKey('/Products', { // createKey(sCollection, oKeyProperties) : string
-                    Productno : '1234' // 나중에 활용할 땐 그 키값에 대한 내용(변수)이 들어가야! 이건 1000번에 해당하는 데이터 한건만 조회.
+                    Productno : '0213' // 나중에 활용할 땐 그 키값에 대한 내용(변수)이 들어가야! 이건 1000번에 해당하는 데이터 한건만 조회.
                 }); // sPath 값 => '/Products('0701')'
 
                 // oDataModel.read("/Products('0701')", { // 하드코딩처럼 키값으로 경로 지정.
@@ -135,12 +171,11 @@ sap.ui.define([
 
                 oDataModel.create("/Products", oBody, {  // create 메서드 : create(sPath, oData, mParameters?) , oData는 Body값
                     success : function () {
-                        MessageBox.success("데이터 생성이 완료되었습니다.");
-                        this._showMessage("데이터 생성이 완료되었습니다!!!!!"); 
-                    }.bind(this),  // success 함수 안쪽에 this(컨)를 넘겨 줘서 컨을 바라볼 수 있게 한다.
+                        this._showMessage('S', "데이터 생성이 완료되었습니다."); 
+                    }.bind(this),  // 함수 밖에서 success 함수 안쪽에 this(컨)를 넘겨 줘서 컨을 바라볼 수 있게 한다.
                     error : function () {
-                        MessageBox.error("데이터 생성 중 오류가 발생하였습니다.");
-                    }
+                        this._showMessage('E', "데이터 생성에 실패하였습니다."); 
+                    }.bind(this)
                 });
             },
             onUpdate: function () {
@@ -151,7 +186,9 @@ sap.ui.define([
                 var oDataModel = this.getView().getModel();
                 var sPath = oDataModel.createKey('/Products',{
                     Productno : oBody.Productno // input으로 받아 온 oBody의 키값을 넣는다.
-                }); // '/Products('1000')'(키값)과 동일
+                }); // 우리가 만든 로컬 모델의 필드명들(키값)들이 서버 모델과 이름이 같아서 이렇게 할 수 있는거임! 
+                    // 서버에서 사용하는 필드명과 로컬 모델의 데이터를 꼭 동일하게 맞춰줘야!
+                    // Products('1000')'(키값)과 동일
 
                 oDataModel.update(sPath, oBody, {
                     success: function () {
@@ -175,8 +212,17 @@ sap.ui.define([
                     }
                 })
             },
-            _showMessage: function (msg) {
-                MessageBox.success(msg);
+            _showMessage: function (category, msg) {
+                switch(category) {
+                    case 'S':
+                        MessageBox.success(msg);
+                        break;
+                    case 'E' : {
+                        MessageBox.error(msg);
+                        break;
+                    }
+                }
+                
             }
         });
     });
