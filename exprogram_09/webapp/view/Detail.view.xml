@@ -1,0 +1,54 @@
+<mvc:View controllerName="exam.exprogram09.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:c="sap.ui.core"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:uxap="sap.uxap"
+    xmlns:form="sap.ui.layout.form">
+
+    <!-- (추가) 관심 상품 등록 기능 - 해당 페이지가 설명하는 상품을 관심 상품 리스트에 추가하는 버튼 -->
+    <Button text="관심 상품 등록" press="onHeart"></Button>
+
+    <Page id="pageId" showNavButton="true" navButtonPress="onNavBack" title="{ProductName}">
+        <Table id="idDetailTable"
+            items="{/Order_Details_Extendeds}">
+            <columns >
+                <Column>
+                    <Text text="주문 ID" />
+                </Column>
+                <Column>
+                    <Text text="상품 이름" />
+                </Column>
+                <Column>
+                    <Text text="상품 금액" />
+                </Column>
+                <Column>
+                    <Text text="수량" />
+                </Column>
+                <Column>
+                    <Text text="할인율" />
+                </Column>
+                <Column>
+                    <Text text="총 금액" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{OrderID}" />
+                        <Text text="{ProductName}" />
+                        <Text text="{UnitPrice}" />
+                        <Text text="{Quantity}" />
+                        <Text text="{Discount}" />
+                        <Text text="{ExtendedPrice}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+    
+</mvc:View>

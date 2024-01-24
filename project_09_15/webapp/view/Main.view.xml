@@ -1,0 +1,9 @@
+<mvc:View controllerName="project0915.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Text text="공부안하고 시험잘보게 해주세요"></Text>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,35 @@
+ <c:FragmentDefinition xmlns:c = "sap.ui.core" xmlns = "sap.m">
+
+    <!-- (추가) 관심 상품 등록 기능 - 관심 상품 리스트 팝업 -->
+    <Dialog id="idDialog"
+            contentWidth="40%"
+            title="관심 상품 리스트"
+            contentHeight="50%"
+            draggable="true"
+            resizable="true">
+        <content>
+            <Table
+                items="{heart>/heartList}"
+                width="auto">
+                <columns>
+                    <Column
+                            width="12em">
+                        <Text text="상품명" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{heart>heartProductName}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+
+        <endButton>
+            <Button text="close" icon="sap-icon://decline" press="onClose"></Button>
+        </endButton>
+    </Dialog>
+
+ </c:FragmentDefinition>

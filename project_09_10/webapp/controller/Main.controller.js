@@ -73,13 +73,13 @@ sap.ui.define([
                     // 뷰에서 했을때와 마찬가지로 type, uid, values 3개의 값 넣기
                     uid : 'categoryAxis',
                     type : 'Dimension',
-                    values : ['Product'] // FlattenedDataset의
+                    values : ['Product'] // FlattenedDataset의 name
                 });
                 var feedColValueAxis = new FeedItem({
                     // 뷰에서 했을때와 마찬가지로 type, uid, values 3개의 값 넣기
                     uid : 'valueAxis',
                     type : 'Measure',
-                    values : ['Amount'] // FlattenedDataset의
+                    values : ['Amount'] // FlattenedDataset의 name
                 });
 
                 // 피드 추가 -> 화면 나옴!

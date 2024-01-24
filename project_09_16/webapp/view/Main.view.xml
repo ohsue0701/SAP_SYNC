@@ -1,0 +1,60 @@
+<mvc:View controllerName="project0916.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+
+        <VBox >
+            <!-- <Image src="https://vrthumb.imagetoday.co.kr/2023/07/13/ta0191t000158.jpg" width="500px" /> -->
+            <!-- <Text text="이미지 배포해서 띄우기"></Text> -->
+            <!-- <Image id="idImage" width = "500px"></Image> -->
+
+            <Table id="idTable"
+
+                items="{/Member}">
+            <columns>
+                <Column
+                    width="12em">
+                    <Text text="Member ID" />
+                </Column>
+                <Column
+                    width="12em">
+                    <Text text="Member Name" />
+                </Column>
+                <Column
+                    width="12em">
+                    <Text text="Tel Number" />
+                </Column>
+                <Column
+                    width="12em">
+                    <Text text="Email" />
+                </Column>
+                <Column
+                    width="12em">
+                    <Text text="Photo" />
+                </Column>
+                
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <Text text="{Memid}"/>
+                        <Text text="{Memnm}"/>
+                        <Text text="{Telno}"/>
+                        <Text text="{Email}"/>
+                        <Image src="{
+                            path : 'Memid',
+                            formatter: '.setImageURL'
+                        }" width="100px" />
+                        <!-- 위 방법과 동일한 아래 한 줄 -->
+                        <!-- <Image src="../image/{Memid}.png" width = "100px"></Image> -->
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+        </VBox>
+
+        </content>
+    </Page>
+</mvc:View>

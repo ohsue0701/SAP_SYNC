@@ -1,0 +1,27 @@
+<mvc:View controllerName="sap.btp.ux410solvingpractice.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:ux="sap.uxap"
+    xmlns:f="sap.ui.layout.form">
+    <Page showNavButton="true" navButtonPress="onNavBack">
+        <ux:ObjectPageLayout >
+            <ux:ObjectPageSection >
+                <ux:subSections>
+                    <ux:ObjectPageSubSection >
+                        <f:SimpleForm id="idForm">
+                            <f:content>
+                                <Label text="OrderID" />
+                                <Text text="{OrderID}"/>
+                                <Label text="ProductID" />
+                                <Text text="{ProductID}"/>
+                                <Label text="UnitPrice" />
+                                <Text text="{UnitPrice}"/>
+			                </f:content>
+                        </f:SimpleForm>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+        </ux:ObjectPageLayout>
+    </Page>
+</mvc:View>
